@@ -64,3 +64,47 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+ER図
+　ER図はMermaid記法および画像でも確認できます。  
+　画像はプロジェクト内の `assets` フォルダに配置しています。
+
+![ER図](./assets/er.png)
+
+###Mermaid記法
+
+```mermaid
+erDiagram
+
+PRODUCTS {
+    bigint unsigned id PK
+    varchar(255) name
+    int price
+    varchar(255) image
+    text description
+    timestamp created_at
+    timestamp updated_at
+}
+
+SEASONS {
+    bigint unsigned id PK
+    varchar(255) name
+    timestamp created_at
+    timestamp updated_at
+}
+
+PRODUCT_SEASON {
+    bigint unsigned id PK
+    bigint unsigned product_id FK
+    bigint unsigned season_id FK
+    timestamp created_at
+    timestamp updated_at
+}
+
+PRODUCTS ||--o{ PRODUCT_SEASON : has
+SEASONS ||--o{ PRODUCT_SEASON : has
+
+###制約
+- UNIQUE(product_id, season_id)
