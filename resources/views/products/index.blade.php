@@ -18,12 +18,28 @@
 
     <select name="sort">
         <option value="">価格で並び替え</option>
-        <option value="high">高い順に表示</option>
-        <option value="low">低い順に表示</option>
+        <option value="high" {{ request('sort') === 'high' ? 'selected' : '' }}>
+            高い順に表示
+        </option>
+        <option value="low" {{ request('sort') === 'low' ? 'selected' : '' }}>
+            低い順に表示
+        </option>
     </select>
 
     <button type="submit">検索</button>
 </form>
+
+@if (request('sort'))
+    <div>
+        @if (request('sort') === 'high')
+            <span>高い順に表示</span>
+        @elseif (request('sort') === 'low')
+            <span>低い順に表示</span>
+        @endif
+
+        <a href="{{ route('products.search', ['keyword' => request('keyword')]) }}">×</a>
+    </div>
+@endif
 
     <a href="{{ route('products.create') }}">
         +商品を追加
