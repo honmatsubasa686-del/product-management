@@ -61,6 +61,13 @@
     <button type="submit">変更を保存</button>
 </form>
 
+<form action="{{ route('products.destroy', $product) }}" method="POST">
+    @csrf
+    @method('DELETE')
+
+    <button type="submit">🗑️</button>
+</form>
+
 <a href="{{ route('products.index') }}">
     戻る
 </a>

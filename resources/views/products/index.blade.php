@@ -45,4 +45,4 @@
         +商品を追加
     </a>
 
-{{ $products->links() }}
+{{ $products->appends(request()->query())->links() }}
