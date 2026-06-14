@@ -7,3 +7,7 @@
 <p>{{ $product->description }}</p>
 
 <a href="{{ route('products.index') }}">戻る</a>
+
+<a href="{{ route('products.edit', $product) }}">
+    変更
+</a>

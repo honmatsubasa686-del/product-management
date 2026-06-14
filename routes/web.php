@@ -31,3 +31,7 @@ Route::post('/products/register', [ProductController::class, 'store'])->name('pr
 
 Route::get('/products/detail/{product}', [ProductController::class, 'show'])
     ->name('products.show');
+
+Route::get('/products/{product}/update', [ProductController::class, 'edit'])->name('products.edit');
+
+Route::patch('/products/{product}/update', [ProductController::class, 'update'])->name('products.update');

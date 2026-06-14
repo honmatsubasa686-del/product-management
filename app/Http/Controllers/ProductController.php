@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateProductRequest;
 use App\Http\Requests\StoreProductRequest;
 use App\Models\Season;
 use App\Models\Product;
@@ -55,5 +56,29 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         return view('products.show', compact('product'));
+    }
+    public function edit(Product $product)
+    {
+        $seasons = Season::all();
+
+        $product->load('seasons');
+
+        return view('products.edit', compact('product', 'seasons'));
+    }
+
+    public function update(UpdateProductRequest $request, Product $product)
+    {
+        $imagePath = $request->file('image')->store('products', 'public');
+
+        $product->update([
+            'name' => $request->name,
+            'price' => $request->price,
+            'image' => $imagePath,
+            'description' => $request->description,
+        ]);
+
+        $product->seasons()->sync($request->season_ids);
+
+        return redirect()->route('products.index');
     }
 }
