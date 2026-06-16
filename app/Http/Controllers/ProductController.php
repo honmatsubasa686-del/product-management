@@ -55,8 +55,11 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
+        $product->load('seasons');
+
         return view('products.show', compact('product'));
     }
+
     public function edit(Product $product)
     {
         $seasons = Season::all();
